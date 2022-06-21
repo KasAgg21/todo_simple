@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:flutter/widgets.dart';
+import 'package:todo_simple/widgets.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
@@ -27,48 +29,27 @@ class _MyHomeState extends State<MyHome> {
         ),
           backgroundColor: Colors.deepOrange,
       ),
-
       body: Container(
-        padding: EdgeInsets.symmetric(
-            vertical: 7,
-            horizontal: 20),
+        margin: EdgeInsets.only(
+          top: 10,
+        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Container(
-            padding: EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 20),
-            width: double.infinity,
-          ),
-              Container(
-                child: Text(
-                    "Get Started",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20),
-              width: double.infinity,
+          children: [
+            TaskCard(
+              title: "Get Started",
+              dec: "Click on the +  icon to add a new ToDo list.",
             ),
-            Container(
-              child: Text(
-                "Click on the +  icon to add a new ToDo list.",
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                ),
-              ),
-            )
-            ],
+            TaskCard(),
+          ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        child: Icon(IconlyLight.plus,
+          size: 30,
         ),
+        backgroundColor:Colors.deepOrange,
+      ),
     );
   }
 }
