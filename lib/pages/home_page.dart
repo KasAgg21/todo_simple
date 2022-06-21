@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:flutter/widgets.dart';
 import 'package:todo_simple/widgets.dart';
+import 'package:todo_simple/pages/todo_page.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
@@ -33,18 +34,33 @@ class _MyHomeState extends State<MyHome> {
         margin: EdgeInsets.only(
           top: 10,
         ),
-        child: Column(
+        child: Expanded(
+          child: ListView(
           children: [
             TaskCard(
               title: "Get Started",
               dec: "Click on the +  icon to add a new ToDo list.",
             ),
             TaskCard(),
+            TaskCard(),
+            TaskCard(),
+            TaskCard(),
+            TaskCard(),
+            TaskCard(),
+            TaskCard(),
           ],
+        ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context)=>Todopage(),
+              ),
+          );
+        },
         child: Icon(IconlyLight.plus,
           size: 30,
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 
 class TaskCard extends StatelessWidget {
 
@@ -63,6 +64,45 @@ class TaskCard extends StatelessWidget {
             )
           ],
         ),
+    );
+  }
+}
+
+class ToDoList extends StatelessWidget {
+  const ToDoList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+              left: 12,
+              top: 10,
+              right: 12,
+            ),
+            child: Icon(
+              IconlyBold.tick_square,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(
+              top: 8
+            ),
+            child: Text(
+              "Hi",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
