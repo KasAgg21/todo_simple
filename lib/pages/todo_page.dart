@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:todo_simple/pages/home_page.dart';
 import 'package:todo_simple/widgets.dart';
 
 class Todopage extends StatefulWidget {
@@ -41,6 +44,9 @@ class _TodopageState extends State<Todopage> {
                         bottom: 10,
                       ),
                       child: TextField(
+                        onSubmitted: (value){
+
+                        },
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -82,9 +88,63 @@ class _TodopageState extends State<Todopage> {
               ),
 
             ),
-            ToDoList(),
+            ToDoList(
+              text: "Enter first task",
+              isDone: false,
+            ),
+            ToDoList(
+              isDone: true,
+            ),
+            ToDoList(
+              isDone: true,
+            ),
           ],
         ),
+      ),
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.4,
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.add),
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context)=>Todopage(),
+                ),
+              );
+            },
+            label: 'New List'
+          ),
+          SpeedDialChild(
+              child: Icon(Icons.home,color: Colors.white,),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context)=>MyHome(),
+                  ),
+                );
+              },
+              label: 'Home',
+            backgroundColor: Colors.deepOrange
+          ),SpeedDialChild(
+              child: Icon(Icons.delete,color: Colors.white,),
+              backgroundColor: Colors.pink,
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context)=>MyHome(),
+                  ),
+                );
+              },
+              label: 'Delete'
+          ),
+        ],
+        backgroundColor:Colors.deepOrange,
       ),
     );
   }

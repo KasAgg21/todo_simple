@@ -69,7 +69,9 @@ class TaskCard extends StatelessWidget {
 }
 
 class ToDoList extends StatelessWidget {
-  const ToDoList({Key? key}) : super(key: key);
+  final String? text;
+  final bool? isDone;
+  ToDoList({@required this.isDone,this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +86,7 @@ class ToDoList extends StatelessWidget {
             ),
             child: Icon(
               IconlyBold.tick_square,
-              color: Colors.white,
+              color: isDone!? Colors.white: Colors.black,
               size: 30,
             ),
           ),
@@ -93,10 +95,11 @@ class ToDoList extends StatelessWidget {
               top: 8
             ),
             child: Text(
-              "Hi",
+              text??
+              "Click to add task",
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
+                color: isDone!? Colors.white24 : Colors.white ,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),

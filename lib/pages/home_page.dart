@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:flutter/widgets.dart';
@@ -17,6 +18,7 @@ class _MyHomeState extends State<MyHome> {
     return Scaffold(
       backgroundColor: Colors.white10,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 70,
 
         centerTitle: true,
@@ -61,7 +63,7 @@ class _MyHomeState extends State<MyHome> {
               ),
           );
         },
-        child: Icon(IconlyLight.plus,
+        child: Icon(CupertinoIcons.add,
           size: 30,
         ),
         backgroundColor:Colors.deepOrange,
