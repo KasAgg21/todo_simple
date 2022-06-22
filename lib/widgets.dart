@@ -6,7 +6,8 @@ class TaskCard extends StatelessWidget {
 
   final String? title;
   final String? dec;
-  TaskCard({this.title,this.dec});
+  final String? task;
+  TaskCard({this.title,this.dec,this.task});
 
 
 
@@ -61,6 +62,33 @@ class TaskCard extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 15,
                 ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 20),
+              width: double.infinity,
+            ),
+            Container(
+              child: Row(
+                children: [
+                  Icon(IconlyBold.tick_square,
+                  color: Colors.white,),
+                  Container(
+                  padding:EdgeInsets.only(
+                      right:10 ),
+                  ),
+                  Text(
+                    task??
+                        " No Description",
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
               ),
             )
           ],

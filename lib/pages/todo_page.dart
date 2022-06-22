@@ -136,6 +136,12 @@ class _TodopageState extends State<Todopage> {
               "des":_desController.text,
               }
               );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context)=>MyHome(),
+                ),
+              );
             },
             label: 'Add'
           ),
