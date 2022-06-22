@@ -4,21 +4,34 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:todo_simple/pages/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todo_simple/pages/todo_page.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
-class Todopage extends StatefulWidget {
+class Viewpage extends StatefulWidget {
 
+  final String title,des,task,id;
 
+  Viewpage({required this.title,required this.des,required this.task,required this.id});
 
   @override
-  State<Todopage> createState() => _TodopageState();
+  State<Viewpage> createState() {
+    return _ViewpageState();
+  }
 }
 
-class _TodopageState extends State<Todopage> {
+class _ViewpageState extends State<Viewpage> {
 
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _desController = TextEditingController();
-  TextEditingController _tkController = TextEditingController();
+  late TextEditingController _titleController;
+  late TextEditingController _desController;
+  late TextEditingController _tkController;
+
+  @override
+  void initState(){
+    super.initState();
+    _titleController = TextEditingController(text: widget.title);
+    _desController = TextEditingController(text: widget.des);
+    _tkController = TextEditingController(text: widget.task);
+  }
 
 
   @override
@@ -45,34 +58,34 @@ class _TodopageState extends State<Todopage> {
             Row(
               children: [
                 Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(
-                        top: 20,
-                        left: 10,
-                        right: 10,
-                        bottom: 10,
-                      ),
-                      child: TextField(
-                        controller: _titleController,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        decoration: InputDecoration(
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                          ),
-                          hintText: "Enter ToDo List Title",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white10,
-                        ),
-
-                      ),
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      top: 20,
+                      left: 10,
+                      right: 10,
+                      bottom: 10,
                     ),
+                    child: TextField(
+                      controller: _titleController,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      decoration: InputDecoration(
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                        ),
+                        hintText: "Enter ToDo List Title",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white10,
+                      ),
+
+                    ),
+                  ),
                 )
               ],
             ),
@@ -110,7 +123,7 @@ class _TodopageState extends State<Todopage> {
                 maxLines: null,
                 controller: _tkController,
                 style: TextStyle(
-                  fontSize: 17,
+                    fontSize: 17,
                     color: Colors.white
                 ),
                 decoration: InputDecoration(
@@ -132,14 +145,16 @@ class _TodopageState extends State<Todopage> {
         overlayOpacity: 0.4,
         children: [
           SpeedDialChild(
-            child: Icon(Icons.add),
+            child: Icon(Icons.edit,color: Colors.white,),
+              label: 'Save Edit',
+              backgroundColor: Colors.green,
             onTap: (){
-              FirebaseFirestore.instance.collection("users").doc(firebase_auth.FirebaseAuth.instance.currentUser!.uid).collection("Todo").add(
-              {
-              "title":_titleController.text,
-              "task":_tkController.text,
-              "des":_desController.text,
-              }
+              FirebaseFirestore.instance.collection("users").doc(firebase_auth.FirebaseAuth.instance.currentUser!.uid).collection("Todo").doc(widget.id).update(
+                  {
+                    "title":_titleController.text,
+                    "task":_tkController.text,
+                    "des":_desController.text,
+                  }
               );
               Navigator.push(
                 context,
@@ -148,7 +163,18 @@ class _TodopageState extends State<Todopage> {
                 ),
               );
             },
-            label: 'Add'
+          ),
+          SpeedDialChild(
+              child: Icon(Icons.add),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context)=>Todopage(),
+                  ),
+                );
+              },
+              label: 'New List'
           ),
           SpeedDialChild(
               child: Icon(Icons.home,color: Colors.white,),
@@ -161,17 +187,14 @@ class _TodopageState extends State<Todopage> {
                 );
               },
               label: 'Home',
-            backgroundColor: Colors.deepOrange
+              backgroundColor: Colors.deepOrange
           ),SpeedDialChild(
               child: Icon(Icons.delete,color: Colors.white,),
               backgroundColor: Colors.pink,
               onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context)=>MyHome(),
-                  ),
-                );
+                FirebaseFirestore.instance.collection("users").doc(firebase_auth.FirebaseAuth.instance.currentUser!.uid).collection("Todo").doc(widget.id).delete().then((value) {
+                  Navigator.pop(context);
+                });
               },
               label: 'Delete'
           ),

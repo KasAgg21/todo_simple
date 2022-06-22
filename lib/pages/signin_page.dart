@@ -112,11 +112,12 @@ class _SigninpageState extends State<Signinpage> {
                       bottom: 13
                   ))
               ),
+
               onPressed: ()async{
                 try {
                   firebase_auth.UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(
                       email: _emailController.text, password: _passController.text);
-                  print(userCredential.user?.email);
+                  final String uid = firebaseAuth.currentUser!.uid;
                   Navigator.push(
                     context,
                     MaterialPageRoute(

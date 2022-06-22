@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:todo_simple/pages/home_page.dart';
+import 'package:todo_simple/pages/signin_page.dart';
 
 class Signuppage extends StatefulWidget {
   const Signuppage({Key? key}) : super(key: key);
@@ -119,7 +119,7 @@ class _SignuppageState extends State<Signuppage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context)=>MyHome(),
+                      builder: (context)=>Signinpage(),
                     ),
                   );
                 } catch (e) {

@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
-import 'package:todo_simple/pages/todo_page.dart' as todo_pg;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
-class TaskCard extends StatelessWidget {
+class TaskCard extends StatefulWidget {
 
   final String? title;
   final String? dec;
   final String? task;
-  TaskCard({this.title,this.dec,this.task});
+  final String? id;
+  TaskCard({this.title,this.dec,this.task,this.id});
+
+  @override
+  State<TaskCard> createState() {
+    return _TaskCardState();
+  }
+}
+class _TaskCardState extends State<TaskCard> {
+
 
 
 
@@ -37,7 +47,7 @@ class TaskCard extends StatelessWidget {
           ),
             Container(
               child: Text(
-                title ??
+                widget.title ??
                 "Untitled",
                 textAlign: TextAlign.left,
                 style: TextStyle(
@@ -55,7 +65,7 @@ class TaskCard extends StatelessWidget {
             ),
             Container(
               child: Text(
-                dec??
+                widget.dec??
                 " No Description",
                 textAlign: TextAlign.justify,
                 style: TextStyle(
@@ -73,14 +83,22 @@ class TaskCard extends StatelessWidget {
             Container(
               child: Row(
                 children: [
-                  Icon(IconlyBold.tick_square,
-                  color: Colors.white,),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: (){
+                        FirebaseFirestore.instance.collection("users").doc(firebase_auth.FirebaseAuth.instance.currentUser!.uid).collection("Todo").doc(widget.id).delete();
+                      },
+                      child: Icon(IconlyBold.tick_square,
+                      color: Colors.white,),
+                    ),
+                  ),
                   Container(
                   padding:EdgeInsets.only(
                       right:10 ),
                   ),
                   Text(
-                    task??
+                    widget.task??
                         " No Description",
                     textAlign: TextAlign.justify,
                     style: TextStyle(

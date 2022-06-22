@@ -1,10 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconly/iconly.dart';
-import 'package:todo_simple/pages/home_page.dart';
 import 'package:flutter/widgets.dart';
-import 'package:todo_simple/pages/sign_page.dart';
 import 'package:todo_simple/pages/signin_page.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
