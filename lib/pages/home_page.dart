@@ -36,21 +36,21 @@ class _MyHomeState extends State<MyHome> {
         margin: EdgeInsets.only(
           top: 10,
         ),
-        child: Expanded(
-          child: ListView(
-          children: [
-            TaskCard(
-              title: "Get Started",
-              dec: "Click on the +  icon to add a new ToDo list.",
-            ),
-            TaskCard(),
-            TaskCard(),
-            TaskCard(),
-            TaskCard(),
-            TaskCard(),
-            TaskCard(),
-            TaskCard(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TaskCard(
+                title: "Get Started",
+                dec: "Click on the +  icon to add a new ToDo list.",
+              ),
+              TaskCard(),
+              TaskCard(),
+              TaskCard(),
+              TaskCard(),
+              TaskCard(),
+              TaskCard(),
+              TaskCard(),
+            ],
         ),
         ),
       ),
