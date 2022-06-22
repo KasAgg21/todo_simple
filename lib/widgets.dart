@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:todo_simple/pages/todo_page.dart' as todo_pg;
 
 class TaskCard extends StatelessWidget {
 
@@ -68,44 +69,33 @@ class TaskCard extends StatelessWidget {
   }
 }
 
-class ToDoList extends StatelessWidget {
-  final String? text;
+/*class ToDoList extends StatelessWidget {
   final bool? isDone;
-  ToDoList({@required this.isDone,this.text});
+  ToDoList({@required this.isDone});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Container(
-            margin: EdgeInsets.only(
-              left: 12,
-              top: 10,
-              right: 12,
-            ),
-            child: Icon(
-              IconlyBold.tick_square,
-              color: isDone!? Colors.white: Colors.black,
-              size: 30,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(
-              top: 8
-            ),
-            child: Text(
-              text??
-              "Click to add task",
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 10,
+        left: 12,
+        right: 10,
+        bottom: 10,
+      ),
+            child: TextField(
+              controller: todo_pg.,
               style: TextStyle(
-                color: isDone!? Colors.white24 : Colors.white ,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+                color: Colors.white
+              ),
+              decoration: InputDecoration(
+                hintStyle: TextStyle(
+                  color: Colors.grey
+                ),
+                hintText: "Enter the Task",
+                border: InputBorder.none,
+                filled: false,
               ),
             ),
-          ),
-        ],
-      ),
     );
   }
-}
+}*/

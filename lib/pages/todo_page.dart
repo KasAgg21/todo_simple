@@ -3,15 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:todo_simple/pages/home_page.dart';
-import 'package:todo_simple/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Todopage extends StatefulWidget {
+
+
 
   @override
   State<Todopage> createState() => _TodopageState();
 }
 
 class _TodopageState extends State<Todopage> {
+
+  TextEditingController _titleController = TextEditingController();
+  TextEditingController _desController = TextEditingController();
+  TextEditingController _tkController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,9 +52,7 @@ class _TodopageState extends State<Todopage> {
                         bottom: 10,
                       ),
                       child: TextField(
-                        onSubmitted: (value){
-
-                        },
+                        controller: _titleController,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -70,6 +76,7 @@ class _TodopageState extends State<Todopage> {
               ],
             ),
             TextField(
+              controller: _desController,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -88,15 +95,28 @@ class _TodopageState extends State<Todopage> {
               ),
 
             ),
-            ToDoList(
-              text: "Enter first task",
-              isDone: false,
-            ),
-            ToDoList(
-              isDone: true,
-            ),
-            ToDoList(
-              isDone: true,
+            Padding(
+              padding: EdgeInsets.only(
+                top: 6,
+                left: 12,
+                right: 10,
+                bottom: 10,
+              ),
+              child: TextField(
+                controller: _tkController,
+                style: TextStyle(
+                  fontSize: 17,
+                    color: Colors.white
+                ),
+                decoration: InputDecoration(
+                  hintStyle: TextStyle(
+                      color: Colors.grey
+                  ),
+                  hintText: "Enter the Task",
+                  border: InputBorder.none,
+                  filled: false,
+                ),
+              ),
             ),
           ],
         ),
@@ -109,14 +129,15 @@ class _TodopageState extends State<Todopage> {
           SpeedDialChild(
             child: Icon(Icons.add),
             onTap: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context)=>Todopage(),
-                ),
+              FirebaseFirestore.instance.collection("Todo").add(
+              {
+              "title":_titleController.text,
+              "task":_tkController.text,
+              "des":_desController.text,
+              }
               );
             },
-            label: 'New List'
+            label: 'Add'
           ),
           SpeedDialChild(
               child: Icon(Icons.home,color: Colors.white,),
